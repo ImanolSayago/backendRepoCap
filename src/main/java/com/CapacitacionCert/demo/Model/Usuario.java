@@ -18,14 +18,13 @@ public class Usuario {
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RolUser tipo;
+    private String tipo;
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String usuario, String password, RolUser tipo) {
+    public Usuario(Long id, String usuario, String password, String tipo) {
         this.id = id;
         this.usuario = usuario;
         this.password = password;
@@ -56,11 +55,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public RolUser getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(RolUser tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

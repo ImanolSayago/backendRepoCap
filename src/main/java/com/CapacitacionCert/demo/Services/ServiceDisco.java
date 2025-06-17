@@ -48,7 +48,7 @@ public class ServiceDisco implements IserviceDisco{
             return false;
         }
 
-        // Obtener artista gestionado
+
         Optional<Artista> artistaOpt = artistaRepository.findById(dto.getArtistaId());
         if (artistaOpt.isEmpty()) {
             System.out.println("Artista no encontrado");
@@ -56,7 +56,7 @@ public class ServiceDisco implements IserviceDisco{
         }
         Artista artistaGestionado = artistaOpt.get();
 
-        // Obtener canciones gestionadas
+
         Set<Cancion> cancionesGestionadas = new HashSet<>();
         for (Long idCancion : dto.getCancionesIds()) {
             Optional<Cancion> cancionOpt = cancionRepository.findById(idCancion);
@@ -68,21 +68,20 @@ public class ServiceDisco implements IserviceDisco{
             cancionesGestionadas.add(cancionGestionada);
         }
 
-        // Crear el disco real
+
         Disco disco = new Disco();
         disco.setTitulo(dto.getTitulo());
         disco.setAnoCreacion(dto.getAnoCreacion());
         disco.setArtista(artistaGestionado);
 
-        // Setear el disco en cada canción
         for (Cancion c : cancionesGestionadas) {
             c.setDisco(disco);
         }
 
-        // Asignar canciones
+
         disco.setCanciones(cancionesGestionadas);
 
-        // Guardar disco
+
         repositoryDisco.save(disco);
 
         return true;
@@ -101,5 +100,29 @@ public class ServiceDisco implements IserviceDisco{
             repositoryDisco.deleteById(id);
             return true;
         }
+    }
+    @Override
+    public Boolean editDisco(Long id, DiscoDTO disco) {
+
+        if (id == null) {
+            System.err.println("Error: El ID del disco a editar no puede ser nulo.");
+            return false;
+        }
+
+        Optional<Disco> discoExistenteOptional = repositoryDisco.findById(id);
+        if (discoExistenteOptional.isEmpty()) {
+            System.err.println("Error: No se encontró el disco con ID " + id + " para editar.");
+            return false;
+        }
+
+        Disco discoExistente = discoExistenteOptional.get();
+
+
+        discoExistente.setTitulo(disco.getTitulo());
+        discoExistente.setAnoCreacion(disco.getAnoCreacion());
+
+
+        repositoryDisco.save(discoExistente);
+        return true;
     }
 }

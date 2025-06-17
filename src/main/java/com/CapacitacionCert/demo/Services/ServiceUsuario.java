@@ -3,6 +3,8 @@ package com.CapacitacionCert.demo.Services;
 import com.CapacitacionCert.demo.Model.Usuario;
 import com.CapacitacionCert.demo.Repository.IrepositoryUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,6 +55,21 @@ public class ServiceUsuario implements IserviceUsuario{
         {
             repositorioUsuario.deleteById(id);
             return true;
+        }
+
+    }
+
+    @Override
+    public ResponseEntity<Usuario> login(Usuario user) {
+        Usuario userEncontrado = repositorioUsuario.findByUsuarioAndPassword(user.getUsuario(),user.getPassword()).orElse(null);
+
+        if(userEncontrado!=null && userEncontrado.getPassword().equals(user.getPassword()) && userEncontrado.getUsuario().equals(user.getUsuario()))
+        {
+            return ResponseEntity.ok(userEncontrado);
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
     }

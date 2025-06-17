@@ -15,4 +15,6 @@ public interface IserviceDisco {
 
     public Boolean deleteDiscoById(Long id);
 
+    public Boolean editDisco(Long id,DiscoDTO disco);
+
 }

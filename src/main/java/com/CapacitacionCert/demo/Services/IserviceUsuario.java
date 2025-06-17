@@ -1,6 +1,7 @@
 package com.CapacitacionCert.demo.Services;
 
 import com.CapacitacionCert.demo.Model.Usuario;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -13,5 +14,8 @@ public interface IserviceUsuario {
     public boolean addUsuario(Usuario usuario);
 
     public boolean deleteUsuario(Long id);
+
+    public ResponseEntity<Usuario> login(Usuario user);
+
 
 }

@@ -33,4 +33,10 @@ public class ControllerDisco {
     public boolean DeleteDisco(@PathVariable Long id) {
         return serviceDisco.deleteDiscoById(id);
     }
+
+    @PutMapping("/edit/{id}")
+    public boolean editDisco(@PathVariable Long id,@RequestBody DiscoDTO disco)
+    {
+        return  serviceDisco.editDisco(id,disco);
+    }
 }
