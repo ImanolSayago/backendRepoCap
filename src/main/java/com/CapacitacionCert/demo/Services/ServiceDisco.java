@@ -73,6 +73,7 @@ public class ServiceDisco implements IserviceDisco{
         disco.setTitulo(dto.getTitulo());
         disco.setAnoCreacion(dto.getAnoCreacion());
         disco.setArtista(artistaGestionado);
+        disco.setUrlImg(dto.getUrlImg());
 
         for (Cancion c : cancionesGestionadas) {
             c.setDisco(disco);

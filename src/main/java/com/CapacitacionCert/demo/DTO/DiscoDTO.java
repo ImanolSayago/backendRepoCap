@@ -11,6 +11,7 @@ public class DiscoDTO {
     private String titulo;
     private String anoCreacion;
     private Long artistaId;
+    private String urlImg;
     private List<Long> cancionesIds;
 
     public String getTitulo() {
@@ -43,5 +44,13 @@ public class DiscoDTO {
 
     public void setCancionesIds(List<Long> cancionesIds) {
         this.cancionesIds = cancionesIds;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 }
